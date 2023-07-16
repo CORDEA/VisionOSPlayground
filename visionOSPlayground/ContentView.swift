@@ -16,6 +16,9 @@ struct ContentView: View {
         NavigationLink(destination: WebViewPage()) {
           Text("WebView")
         }
+        NavigationLink(destination: ModelPage()) {
+          Text("3DModelView")
+        }
       }
     }
   }
