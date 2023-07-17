@@ -9,6 +9,8 @@ import SwiftUI
 
 @main
 struct visionOSPlaygroundApp: App {
+  @State private var immersionStyle: ImmersionStyle = .mixed
+
   var body: some Scene {
     WindowGroup(id: "View") {
       ContentView()
@@ -17,5 +19,8 @@ struct visionOSPlaygroundApp: App {
       VolumetricPage()
     }
     .windowStyle(.volumetric)
+    ImmersiveSpace(id: ImmersiveSpacePage.id) {
+      ImmersiveSpacePage()
+    }.immersionStyle(selection: $immersionStyle, in: .mixed)
   }
 }

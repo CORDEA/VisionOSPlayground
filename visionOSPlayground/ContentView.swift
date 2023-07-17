@@ -11,8 +11,11 @@ import SwiftUI
 
 struct ContentView: View {
   @State private var isWindowOpened: Bool = false
+  @State private var isImmersiveSpaceOpened: Bool = false
   @Environment(\.openWindow) private var openWindow
   @Environment(\.dismissWindow) private var dismissWindow
+  @Environment(\.openImmersiveSpace) private var openImmersiveSpace
+  @Environment(\.dismissImmersiveSpace) private var dismissImmersiveSpace
 
   var body: some View {
     NavigationStack {
@@ -34,6 +37,17 @@ struct ContentView: View {
               openWindow(id: VolumetricPage.id)
             } else {
               dismissWindow(id: VolumetricPage.id)
+            }
+          }.padding(.bottom, 16)
+        Text("Show in an immersive space").font(.headline).padding(.bottom, 4)
+        Toggle(isOn: $isImmersiveSpaceOpened) {}.labelsHidden()
+          .onChange(of: isImmersiveSpaceOpened) { _, isShowing in
+            Task {
+              if isShowing {
+                await openImmersiveSpace(id: ImmersiveSpacePage.id)
+              } else {
+                await dismissImmersiveSpace()
+              }
             }
           }
       }
