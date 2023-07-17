@@ -10,8 +10,12 @@ import SwiftUI
 @main
 struct visionOSPlaygroundApp: App {
   var body: some Scene {
-    WindowGroup {
+    WindowGroup(id: "View") {
       ContentView()
+    }.windowStyle(.plain)
+    WindowGroup(id: VolumetricPage.id) {
+      VolumetricPage()
     }
+    .windowStyle(.volumetric)
   }
 }
